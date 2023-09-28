@@ -27,10 +27,10 @@ class send_sms():
             message_response = self.sms.send(message_body,receivers,sender)
 
             #log the status and response of the message sent
-            return({"message":f"(Message sent) {message_response['SMSMessageData']['Message']}"})
+            return {"message":f"(Message sent) {message_response['SMSMessageData']['Message']}"}
 
         except Exception as e:
-            return ({"Error":f"Aw snap! It didn't work, here is the error : {e}"})
+            return {"Error":f"Aw snap! It didn't work, here is the error : {e}"}
 
 
 
