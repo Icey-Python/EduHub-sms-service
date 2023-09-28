@@ -13,10 +13,11 @@ CORS(app)
 username = os.environ.get('username')
 api_key= os.environ.get('api_key')
 africastalking.initialize(username,api_key)
-
+msg = {'message':''}
 class send_sms():
     sms = africastalking.SMS       
     def send(self,recepients:list,message:str,sender:str):
+        global msg
         print('sending message')
         #TODO: Send message
         receivers:list = recepients
@@ -27,10 +28,10 @@ class send_sms():
             message_response = self.sms.send(message_body,receivers,sender)
 
             #log the status and response of the message sent
-            print(f"{message_response['SMSMessageData']['Message']}")
+            msg = {"message":f"{message_response['SMSMessageData']['Message']}"}
 
         except Exception as e:
-            print(f"Aw snap! It didn't work, here is the error : {e}")
+            msg = {"error":f"Aw snap! It didn't work, here is the error : {e}"}
 
 
 
@@ -43,13 +44,14 @@ def index():
 @cross_origin()
 @app.route("/send", methods=['POST'])
 def send():
+    global msg
     data = request.get_json()
     recepients:str = data['recepients']
     message:list = data['message']
     sender_id:str = "15021"
 
     send_sms().send(recepients=recepients,message=message,sender=sender_id)
-    return {"message":"Sent"}
+    return msg
 
 if __name__ == "__main__":
     #TODO: Call send message function 
