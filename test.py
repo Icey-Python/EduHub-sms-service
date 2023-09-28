@@ -5,5 +5,5 @@ payload = {
     "recepients":['+254743413621']
 }
 
-resp = requests.post('https://edu-hub-sms-service-1.vercel.app/send',json=payload)
+resp = requests.post('https://edu-hub-sms-service-1.vercel.app/send',json=payload).content
 print(resp)

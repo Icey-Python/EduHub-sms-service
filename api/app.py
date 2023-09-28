@@ -27,10 +27,10 @@ class send_sms():
             message_response = self.sms.send(message_body,receivers,sender)
 
             #log the status and response of the message sent
-            return {"message":f"(Message sent) {message_response['SMSMessageData']['Message']}"}
+            print(f"{message_response['SMSMessageData']['Message']}")
 
         except Exception as e:
-            return {"Error":f"Aw snap! It didn't work, here is the error : {e}"}
+            print(f"Aw snap! It didn't work, here is the error : {e}")
 
 
 
@@ -47,7 +47,9 @@ def send():
     recepients:str = data['recepients']
     message:list = data['message']
     sender_id:str = "15021"
+
     send_sms().send(recepients=recepients,message=message,sender=sender_id)
+    return {"message":"Sent"}
 
 if __name__ == "__main__":
     #TODO: Call send message function 
