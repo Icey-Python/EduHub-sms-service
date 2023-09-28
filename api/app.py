@@ -15,16 +15,16 @@ def index():
     return "This is the index route: use `/send` to send messages"
 
 #send message to recepient
-@cross_origin()
-@app.route("/send", methods=['POST'])
-def send():
-    data = request.get_json()
-    recepients:str = data['recepients']
-    message:list = data['message']
-    sender_id:str = "15021"
+# @cross_origin()
+# @app.route("/send", methods=['POST'])
+# def send():
+#     data = request.get_json()
+#     recepients:str = data['recepients']
+#     message:list = data['message']
+#     sender_id:str = "15021"
 
-    send_sms().send(recepients=recepients,message=message,sender=sender_id)
-    return {"message":"Sent"}
+#     send_sms().send(recepients=recepients,message=message,sender=sender_id)
+#     return {"message":"Sent"}
 
 if __name__ == "__main__":
     #TODO: Call send message function 
